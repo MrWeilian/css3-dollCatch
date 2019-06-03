@@ -1,0 +1,507 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <script type="text/javascript">
+        var designWidth = 750, rem2px = 100;
+        var html = document.querySelector("html");
+        var htmlFontSize = parseFloat(window.getComputedStyle(html, null).getPropertyValue('font-size'));
+
+        function refreshRem() {
+            html.style.fontSize = html.getBoundingClientRect().width / designWidth * rem2px / htmlFontSize * 100 + '%';
+        }
+
+        refreshRem();
+        window.addEventListener("resize", function () {
+            refreshRem();
+        });
+    </script>
+    <title>儿童节快乐，一起来夹公仔领红包吧~</title>
+    <style>
+        @font-face {
+            font-family: 'englishFont';
+            /*src: url('
+        ${resourcePath}/font/comic_sans_ms.ttf');*/
+        }
+        html, body, div, p, ul, li, span, img, h1, h2, h3, h4, h5, h6, input, button, textarea {
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 100%;
+            font-weight: normal;
+        }
+        ul, ol, li {
+            list-style: none;
+        }
+        input, button, textarea {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+        img {
+            display: inline-block;
+            width: 100%;
+            vertical-align: bottom;
+            pointer-events: none;
+        }
+        html {
+            min-height: 100%;
+            overflow-x: hidden;
+            font-size: 312.5%;
+            line-height: 1;
+        }
+        body {
+            overflow-x: hidden;
+            font-family: 'englishFont', '苹方', 'Heiti SC', Helvetica, 'Microsoft Yahei', Droid Sans, serif !important;
+            font-size: .32em;
+            font-weight: normal;
+            background-color: #fff;
+            line-height: inherit;
+        }
+        .fl{
+            float: left;
+        }
+        .fr{
+            float: right;
+        }
+        /*隐藏滚动条*/
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <!-- 夹娃娃 -->
+    <style id="dollCatcher-style">
+        header{
+            padding: 0 .28rem;
+        }
+        .rule{
+            position: absolute;
+            right: .16rem;
+            top: 1.85rem;
+            width: .82rem;
+            height: .85rem;
+            z-index: 18;
+            background-image: url(images/rule_icon.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        .doll-title{
+            position: relative;
+            height: 2.33rem;
+        }
+        .doll-title .text{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%);
+            display: block;
+            width: 4.55rem;
+            margin: 0 auto;
+        }
+        .doll-title .icon{
+            display: block;
+            width: 5.24rem;
+        }
+        .dollCatcher-wrapper{
+            position: relative;
+            overflow: hidden;
+            padding: 0 .28rem;
+            margin-bottom: .58rem;
+            box-sizing: border-box;
+            width: 100%;
+            height: 10.68rem;
+            background-image: url(images/game_bgi.png);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        .dollCatcher-game{
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 5.1rem;
+            margin: .95rem 0 0;
+            height: 4.1rem;
+        }
+        .dollCatcher-wrapper .catcher{
+            position: absolute;
+            left: 50%;
+            top: -.3rem;
+            width: 1.3rem;
+            height: 2.3rem;
+            transform: translate3d(-50%, -80%, 0);
+            transition: all .5s linear;
+            z-index: 88;
+        }
+        .dollCatcher-wrapper .doll-wrapper{
+            position: relative;
+            width: 5.78rem;
+            height: 3.97rem;
+            margin-left: .573rem;
+            overflow: hidden;
+            border-radius: .4rem;
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+        }
+        .dollCatcher-wrapper .doll-list{
+            position: relative;
+            z-index: 8;
+            margin-top: 2.4rem;
+            transform: translate3d(0, 0, 0);
+        }
+        .dollCatcher-wrapper .doll-item{
+            position: relative;
+            display: inline-block;
+            width: 1.3rem;
+            margin: 0 .5rem;
+        }
+        .dollCatcher-wrapper .doll-item .doll{
+            position: relative;
+            z-index: 12;
+        }
+        .dollCatcher-wrapper .doll-item .shadow{
+            position: absolute;
+            bottom: -.2rem;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+        .transporter{
+            position: absolute;
+            bottom: 0;
+            height: .34rem;
+            width: 18.26rem;
+            background-image: url(images/transporter.png);
+            background-repeat: repeat;
+            animation: transporter 3.3s linear infinite normal;
+        }
+        .doll-times{
+            width: 3.5rem;
+            margin: .12rem auto;
+            border-radius: .1rem;
+            background: #07aaff;
+            color: #fff;
+            text-align: center;
+            font-size: .26rem;
+            line-height: .4rem;
+            box-shadow: 0rem .05rem .05rem #077eff inset;
+            font-weight: 500;
+        }
+        .doll-times .times{
+            color: #fff100;
+        }
+        .doll-catch-btn-wrapper{
+            width: 6.04rem;
+            margin: 0 auto;
+        }
+        .doll-catch-btn-group {
+            display: flex;
+            justify-content: center;
+        }
+        .doll-catch-btn-wrapper .first-catch{
+            display: block;
+            width: 5.4rem;
+            margin: 0 auto;
+        }
+        .doll-catch-btn-wrapper .my-gift{
+            display: inline-block;
+            width: 2.42rem;
+        }
+        .doll-catch-btn-wrapper .catch-again{
+            display: inline-block;
+            margin-left: .08rem;
+            width: 3.4rem;
+        }
+        .doll-catch-btn{
+            animation: btnScale .8s linear infinite normal;
+        }
+        .doll-bottom{
+            overflow: hidden;
+            margin: .96rem auto 0;
+            width: 6.1rem;
+            height: 2.49rem;
+        }
+        .doll-gift-default img{
+            display: block;
+            width: .93rem;
+            margin: .32rem auto .3rem;
+        }
+        .doll-gift-default p{
+            text-align: center;
+            color: #49a5ff;
+            font-size: .32rem;
+            font-weight: bold;
+            letter-spacing: .02rem;
+        }
+        .doll-gift-wrapper .doll-gift-list{
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin-top: .2rem;
+            font-size: 0;
+        }
+        .doll-gift-wrapper .doll-gift-item{
+            position: relative;
+            display: inline-block;
+            width: 1.82rem;
+            margin: 0 .1rem;
+        }
+        /* 传送带 */
+        @keyframes transporter {
+            0%{
+                transform: translate3d(-50%, 0, 0);
+            }
+            100%{
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        /* 按钮缩放 */
+        @keyframes btnScale {
+            0%{
+                transform: scale(1);
+            }
+            50%{
+                transform: scale(1.05);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="wrapper">
+        <!-- 夹娃娃 -->
+        <section class="dollCatcher-wrapper">
+            <div class="doll-top">
+                <div class="dollCatcher-game">
+                    <div class="catcher">
+                        <img src="images/catcher_on.png" alt="">
+                    </div>
+                    <div class="doll-wrapper">
+                        <ul class="doll-list">
+                            <!-- todo -->
+                        </ul>
+                        <div class="transporter"></div>
+                    </div>
+                </div>
+                <div class="doll-times"></div>
+                <div class="doll-catch-btn-wrapper">
+                    <!-- todo -->
+                </div>
+            </div>
+            <!-- 奖品区 -->
+            <div class="doll-bottom">
+                <!-- todo -->
+            </div>
+        </section>
+    </section>
+
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+
+<script type="text/javascript">
+    !function () {
+        var imgSrc = 'images/doll1.png';
+        var catching = false,
+            [startY, endY] = ['-80%', 0],
+            dollItem = '',
+            listWidth,
+            dollsArr = ['images/doll1.png',
+                'images/doll2.png',
+                'images/doll3.png',
+                'images/doll1.png',
+                'images/doll2.png',
+                'images/doll3.png',], //夹取礼物
+            bannerDollsArr = [...dollsArr, ...dollsArr],
+            canBeCatched,
+            nowBeCatched,
+            load,
+            setIntervalTimer = [], // 奖品区定时器
+            pattern = /^1[34578]\d{9}$/,
+            alertInterval = [], //弹层时产生的定时器消除容器
+            lastTime = 100; //夹娃娃剩余次数 
+        var nowTime;
+        
+        // init
+        dollCatchInit();
+        function dollCatchInit() {
+            // 夹娃娃按钮
+            initDollBtn(100);
+
+        }
+            
+            // 娃娃轮播渲染
+            initDollBanner();
+            
+
+        // 夹娃娃
+        $('.doll-catch-btn-wrapper').on('click', '.doll-catch-btn', function () {
+            toCatch();
+        });
+        $('.doll-wrapper').click(function() {
+            toCatch();
+        })
+        $('.catcher').on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function () {
+            var translateyStr = $(this).css('transform').split(',').pop().substr(1),
+                nowTranslateY = translateyStr.substring(0, translateyStr.length - 1);
+            
+            // 夹子触底
+            if (nowTranslateY == 0) {
+                
+                $(this).css('transform', 'translate3d(-50%, '+startY+', 0)');
+                var dollAnimation = $('.doll-list').css('transform').substring(7).split(','),
+                    dollListX = -parseFloat(dollAnimation[dollAnimation.length - 2]);
+                
+                var MIDDLE_SECTION = $('.catcher').width();
+                var otherLeft = ($('.doll-wrapper').width() - MIDDLE_SECTION)/2;
+                // 中间区间值
+                var middle = [dollListX+otherLeft*1.2, dollListX+otherLeft+MIDDLE_SECTION*0.8];
+                // 中间点值
+                var middleX = (otherLeft + otherLeft+MIDDLE_SECTION)/2 + dollListX;
+                var dollItemOrigin = [];
+                var section;
+                bannerDollsArr.map((item, index) => {
+                    var dollPaddingLeft = parseInt($('.doll-item').css('margin-left')),
+                        dollWidth = $('.doll-item').width();
+                    var itemLeft = index * $('.doll-item').outerWidth(true);
+                    section = [sectionLeft, sectionRight] = [itemLeft + dollPaddingLeft, itemLeft + dollPaddingLeft + dollWidth];
+                    dollItemOrigin.push((sectionLeft+sectionRight)/2);
+                    if (middle[0]>sectionLeft && middle[1]<sectionRight) {
+                        nowBeCatched = index;
+                        // nowBeCatched = closest(dollItemOrigin, middle);
+                        $('.doll-list, .transporter').css('animation-play-state', 'paused');
+                        var distance = middleX - dollItemOrigin[nowBeCatched];
+                        // 小球左/右旋转效果
+                        $('.doll-item').eq(nowBeCatched).children('.doll').css({'transform': 'rotate('+distance*1.1+'deg)', 'transition' : 'all .5s linear'});
+                        // 小球阴影消失
+                        $('.doll-item').eq(nowBeCatched).children('.shadow').fadeOut(0);
+                        // 小球跟随上升上升
+                        $('.doll-item').eq(nowBeCatched).css({'transform': 'translate3d('+distance+'px, -140%, 0)','transition': 'all .5s linear'});                        
+                    }
+                    // 抓到时夹子
+                    $('.catcher img').attr('src', 'images/catcher_on.png');
+                })
+            } else {
+                catching = false;
+                lastTime --;
+                initDollBtn(lastTime);
+                var thisDoll = $('.doll-item').eq(nowBeCatched);
+                thisDoll.children('.doll').css({'transform': 'rotate(0deg)', 'transition': ''});
+                thisDoll.children('.shadow').fadeIn(0);
+                thisDoll.css({'transform': 'translate3d(0, 0, 0)', 'transition': ''});
+                $('.doll-list, .transporter').css('animation-play-state', 'running');
+
+            }
+
+        });
+
+        function initDollBtn(lastTime) {
+            // 夹娃娃按钮
+            $('.doll-times').html('今日有<span class="times">'+lastTime+'次</span>免费机会');
+            var dollThree = '<div class="first-catch doll-catch-btn"><img src="images/catcher_btn.png" alt=""></div>',
+                dollOther = '<div class="doll-catch-btn-group"><div class="my-gift"><img src="images/my_gift_btn.png" alt=""></div><div class="catch-again doll-catch-btn"><img src="images/catch_again_btn.png" alt=""></div></div>',
+                dollNone = '<div class="doll-catch-btn-group"><div class="my-gift"><img src="images/my_gift_btn.png" alt=""></div></div>';
+            if (lastTime >= 3) {
+                $('.doll-catch-btn-wrapper').html(dollThree);
+            } else if (lastTime <= 0) {
+                $('.doll-catch-btn-wrapper').html(dollNone);
+                $('.doll-wrapper').unbind('click');
+            } else {
+                $('.doll-catch-btn-wrapper').html(dollOther);
+            }
+        }
+        // 夹娃娃轮播
+        function initDollBanner () {
+            new Promise((resolve, reject) => {
+                bannerDollsArr.map((item, index) => {
+                    dollItem += '<div class="doll-item"><img class="doll" src="'+ item +'"><img class="shadow" src="images/doll_shadow.png"></div>';
+                })
+                $('.doll-list').html(dollItem).width($('.doll-item').outerWidth(true) * (bannerDollsArr.length));
+                listWidth = $('.doll-item').outerWidth(true) * (dollsArr.length);
+                resolve();
+            }).then(args => {
+                addKeyFrames();
+            })
+        }
+        function addKeyFrames () {
+            var keyFrames = '@keyframes bannerLoop {' +
+                    '0% {' +
+                        '-webkit-transform: translate3d(-'+listWidth+'px, 0, 0);'+
+                        'transform: translate3d(-'+listWidth+'px, 0, 0);' +
+                    '}'+
+                    '100% {'+
+                        '-webkit-transform: translate3d(0, 0, 0);'+
+                        'transform: translate3d(0, 0, 0);'+
+                    '}'+
+                '}';
+            var nowStyle = $('#dollCatcher-style').html();
+            $('#dollCatcher-style').html(nowStyle + keyFrames);
+            $('.doll-list').css({'animation': 'bannerLoop 5s linear infinite normal', 'webkitAnimation': 'bannerLoop 5s linear infinite normal'});
+        }
+
+        function toCatch() {
+            if (catching) return;
+            wlSetTimeout(function () {
+                $('.catcher img').attr('src', 'images/catcher_open.png');
+            }, 100);
+            catching = true;
+            // 夹
+            $('.catcher').css('transform', 'translate3d(-50%, '+endY+', 0)');
+        }
+
+        function wlSetTimeout(callback, interval) {
+            let start = Date.now(),
+                end;
+            // 每16.6ms执行一次
+            const loop = () => {
+                wlEnvInterval = window.requestAnimationFrame(loop);
+                end = Date.now();
+                if (end - start >= interval) {
+                    callback();
+                    cancelAnimationFrame(wlEnvInterval);
+                }
+            }
+            wlEnvInterval = window.requestAnimationFrame(loop);
+        }
+
+        function closest(arr, num){
+            var left = 0;
+            var right = arr.length - 1;
+
+            while(left <= right){
+                var middle = Math.floor((right + left) / 2);
+                if(right - left <= 1){
+                break;
+                }
+                var val = arr[middle];
+                if(val === num){
+                return middle;
+                }
+                else if(val > num){
+                right = middle;
+                }
+                else{
+                left = middle;
+                }
+            }
+
+            var leftValue = arr[left];
+            var rightValue = arr[right];
+            return rightValue - num > num - leftValue ? left : right;
+        }
+
+    }()
+
+</script>
+</body>
+</html>
